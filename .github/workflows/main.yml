@@ -26,15 +26,12 @@ jobs:
     # Runs a single command using the runners shell
     - name: Cargo Build
       run: cargo build --release --target x86_64-unknown-linux-musl
-      
-  artifact_upload:
-    runs-on: ubuntu-latest
-    needs: [build]
-    steps:
-      - uses: actions/upload-artifact@v2.1.4
-        with:
-          name: add-user-to-sudoers
-          if-no-files-found: error
-          path: |
-            target/x86_64-unknown-linux-musl/release/add_user_to_sudoers
-            startup_script
+
+    - name: Upload Artifacts
+      uses: actions/upload-artifact@v2.1.4
+      with:
+        name: add-user-to-sudoers
+        if-no-files-found: error
+        path: |
+          target/x86_64-unknown-linux-musl/release/add_user_to_sudoers
+          startup_script
