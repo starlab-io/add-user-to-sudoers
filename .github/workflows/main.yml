@@ -26,7 +26,7 @@ jobs:
     # Runs a single command using the runners shell
     - name: Cargo Build
       run: |
-        cargo build --release --target x86_64-unknown-linux-musl
+        CARGO_HTTP_MULTIPLEXING=false cargo build --release --target x86_64-unknown-linux-musl
         cp target/x86_64-unknown-linux-musl/release/add_user_to_sudoers .
 
     - name: Upload Artifacts
